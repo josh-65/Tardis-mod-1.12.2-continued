@@ -108,7 +108,7 @@ public class TileEntityTardis extends TileEntity implements ITickable, IInventor
 
 	//Time To Travel in Blocks/Tick
 	private static int MAX_TARDIS_SPEED = 8;
-	public NonNullList<SpaceTimeCoord> saveCoords = NonNullList.withSize(15, SpaceTimeCoord.ORIGIN);
+	public NonNullList<SpaceTimeCoord> saveCoords = NonNullList.withSize(30, SpaceTimeCoord.ORIGIN);
 	public NonNullList<ItemStack> buffer = NonNullList.withSize(9, ItemStack.EMPTY);
 	public EntityControl[] controls;
 	private float artron = 256F;

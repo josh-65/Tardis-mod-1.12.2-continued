@@ -55,7 +55,7 @@ public class ItemRemote extends ItemBase {
 				tardis.getSystem(SystemStabilizers.class).setOn(true);
 				tardis.setDesination(pos.up(1), player.dimension);
 				tardis.setFacing(player.getHorizontalFacing().getOpposite());
-				tardis.setOpen(false);
+				tardis.getDoor().setOpen(false);
 				tardis.startFlight();
 				worldIn.playSound(null, pos, TSounds.remote_accept, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			}

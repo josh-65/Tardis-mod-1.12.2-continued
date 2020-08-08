@@ -23,7 +23,7 @@ public class BlockToyotaHexalight4 extends Block implements IARSBlock {
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
         if(isOn) {
-            return 10;
+            return 15;
         }else {
             return 0;
         }

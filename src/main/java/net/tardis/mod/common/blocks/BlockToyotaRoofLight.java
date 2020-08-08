@@ -19,7 +19,7 @@ public class BlockToyotaRoofLight extends Block implements IARSBlock {
         this.isOn = isOn;
 
         if (isOn) {
-            this.setLightLevel(1.0F);
+            this.setLightLevel(15);
         }
     }
 
