@@ -29,6 +29,7 @@ import net.minecraftforge.server.permission.PermissionAPI;
 import net.tardis.mod.api.disguise.DisguiseRegistry;
 import net.tardis.mod.client.models.exteriors.TileEntityDoorTT;
 import net.tardis.mod.common.ars.ConsoleRoom;
+import net.tardis.mod.common.ars.Room;
 import net.tardis.mod.common.blocks.TBlocks;
 import net.tardis.mod.common.commands.TardisCommand;
 import net.tardis.mod.common.dimensions.TDimensions;
@@ -94,7 +95,9 @@ import net.tardis.mod.common.tileentity.TileEntityAlembic;
 import net.tardis.mod.common.tileentity.TileEntityAlembic.AlembicRecipe;
 import net.tardis.mod.common.tileentity.TileEntityComponentRepair;
 import net.tardis.mod.common.tileentity.TileEntityDoor;
-import net.tardis.mod.common.tileentity.TileEntityEPanel;
+import net.tardis.mod.common.tileentity.TileEntityEPanelItem;
+import net.tardis.mod.common.tileentity.TileEntityEPanelRoom;
+import net.tardis.mod.common.tileentity.TileEntityEPanelLight;
 import net.tardis.mod.common.tileentity.TileEntityEgg;
 import net.tardis.mod.common.tileentity.TileEntityFoodMachine;
 import net.tardis.mod.common.tileentity.TileEntityHellbentLight;
@@ -199,7 +202,9 @@ public class Tardis {
 		registerTileEntity(TileEntityDoor.class, "TileEntityDoor");
 		registerTileEntity(TileEntityAlembic.class, "TileEntityAlembic");
 		registerTileEntity(TileEntityFoodMachine.class, "TileEntityFoodMachine");
-		registerTileEntity(TileEntityEPanel.class, "TileEntityEPanel");
+		registerTileEntity(TileEntityEPanelItem.class, "TileEntityEPanelItem");
+		registerTileEntity(TileEntityEPanelRoom.class, "TileEntityEPanelRoom");
+		registerTileEntity(TileEntityEPanelLight.class, "TileEntityEPanelLight");
 		registerTileEntity(TileEntityTardisCoral.class, "TileEntityTardisCoral");
 		registerTileEntity(TileEntityLight.class, "TileEntityLight");
 		registerTileEntity(TileEntityHellbentLight.class, "TileEntityHellbentLight");
@@ -285,18 +290,35 @@ public class Tardis {
 		RepairRecipes.registerRecipe(TItems.temporal_grace_circuits, Items.SHIELD);
 		RepairRecipes.registerRecipe(TItems.thermo, Items.IRON_INGOT);
 		
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_0.png", "interior/interior_0", new BlockPos(10, 2, 9));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_1.png", "interior/interior_1", new BlockPos(9, 2, 9));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_greymatter.png", "interior/interior_greymatter", new BlockPos(17 ,2 ,17));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_study.png", "interior/interior_study", new BlockPos(14,2,8));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_lodge.png", "interior/interior_lodge", new BlockPos(17, 2, 17));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_aquatic.png", "interior/interior_aquatic", new BlockPos(19,2,18));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_industrial.png", "interior/interior_industrial", new BlockPos(11, 2, 18));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_helian.png", "interior/interior_helian", new BlockPos(18,1,18));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_magmatic.png", "interior/interior_magmatic", new BlockPos(21, 3, 16));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_explorer.png", "interior/interior_explorer", new BlockPos(23, 3, 20));
-		ConsoleRoom.registerConsoleRoom("textures/gui/previews/preview_builder.png", "interior/interior_builder", new BlockPos(9, 1, 9));
+		//Tardis interiors
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_0.png", "tardis/interior_0", new BlockPos(10, 2, 9));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_1.png", "tardis/interior_1", new BlockPos(9, 2, 9));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_greymatter.png", "tardis/interior_greymatter", new BlockPos(17 ,2 ,17));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_study.png", "tardis/interior_study", new BlockPos(14,2,8));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_lodge.png", "tardis/interior_lodge", new BlockPos(17, 2, 17));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_aquatic.png", "tardis/interior_aquatic", new BlockPos(19,2,18));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_industrial.png", "tardis/interior_industrial", new BlockPos(11, 2, 18));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_helian.png", "tardis/interior_helian", new BlockPos(18,1,18));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_magmatic.png", "tardis/interior_magmatic", new BlockPos(21, 3, 16));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_explorer.png", "tardis/interior_explorer", new BlockPos(23, 3, 20));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_iceshrine.png", "tardis/interior_iceshrine", new BlockPos(11, 2, 11));
+		ConsoleRoom.registerConsoleRoom("textures/gui/previews/interior_builder.png", "tardis/interior_builder", new BlockPos(9, 1, 9));
 		
+		//Tardis corridors
+		Room.registerRoom("textures/gui/previews/corridor_stright_short.png", "tardis/corridor_straight_short", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/corridor_stright_long.png", "tardis/corridor_straight_long", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/corridor_+way.png", "tardis/corridor_+way", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/corridor_Tway.png", "tardis/corridor_Tway", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/corridor_left.png", "tardis/corridor_left", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/corridor_right.png", "tardis/corridor_right", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/corridor_lift.png", "tardis/corridor_lift", new BlockPos(9, 1, 9));
+
+		//Tardis rooms
+		Room.registerRoom("textures/gui/previews/room_builder.png", "tardis/room_builder", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/room_lab.png", "tardis/room_builder", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/room_farm.png", "tardis/room_builder", new BlockPos(9, 1, 9));
+		Room.registerRoom("textures/gui/previews/room_bedroom.png", "tardis/room_builder", new BlockPos(9, 1, 9));
+
 
 		TileEntitySonicWorkbench.RECIPES.put(TItems.key, new Item[]{TItems.key_01});
 		final Item[] sonics = new Item[ItemSonic.SONICS.size()];

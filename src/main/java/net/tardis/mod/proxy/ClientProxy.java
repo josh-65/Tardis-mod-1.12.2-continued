@@ -2,6 +2,7 @@ package net.tardis.mod.proxy;
 
 import java.util.ArrayList;
 
+import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelOcelot;
@@ -117,7 +118,9 @@ import net.tardis.mod.common.entities.vehicles.EntityBessie;
 import net.tardis.mod.common.items.TItems;
 import net.tardis.mod.common.tileentity.TileEntityAlembic;
 import net.tardis.mod.common.tileentity.TileEntityDoor;
-import net.tardis.mod.common.tileentity.TileEntityEPanel;
+import net.tardis.mod.common.tileentity.TileEntityEPanelItem;
+import net.tardis.mod.common.tileentity.TileEntityEPanelRoom;
+import net.tardis.mod.common.tileentity.TileEntityEPanelLight;
 import net.tardis.mod.common.tileentity.TileEntityHellbentLight;
 import net.tardis.mod.common.tileentity.TileEntityTardis;
 import net.tardis.mod.common.tileentity.TileEntityTractorBeam;
@@ -165,7 +168,7 @@ public class ClientProxy extends ServerProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderConsole());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDoor.class, new RenderTileDoor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlembic.class, new RenderAlembic());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEPanel.class, new RenderElectricPanel());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEPanelItem.class, new RenderElectricPanel());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHellbentLight.class, new RenderHellbentLight());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHellbentMonitor.class, new RenderHellbentMonitor());
@@ -272,8 +275,6 @@ public class ClientProxy extends ServerProxy {
 	public void init() {
 		TItems.first_cane.setTileEntityItemStackRenderer(new RenderTEISRItem(new ModelFirstCane(), ModelFirstCane.TEXTURE));
 		TItems.sonic13th.setTileEntityItemStackRenderer(new RenderTEISRItem(new ModelSonic13()));
-		//TItems.player_victim.setTileEntityItemStackRenderer(new TEISRVictim());
-
 		Item.getItemFromBlock(TBlocks.tardis_top).setTileEntityItemStackRenderer(new RenderItemTardis());
 		Item.getItemFromBlock(TBlocks.tardis_top_01).setTileEntityItemStackRenderer(new RenderItemTardis02());
 		Item.getItemFromBlock(TBlocks.alembic).setTileEntityItemStackRenderer(new RenderItemAlembic());

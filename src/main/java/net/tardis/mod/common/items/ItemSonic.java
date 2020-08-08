@@ -123,7 +123,8 @@ public class ItemSonic extends Item {
 		IScrew sc = (ScrewdriverHandler.MODES.get(getMode(held)));
 		RayTraceResult lookPos = this.rayTrace(worldIn, player, true);
 		setOpen(held, 1);
-		if (lookPos != null && lookPos.getBlockPos() != null && player.isSneaking() && worldIn.getBlockState(lookPos.getBlockPos()).getBlock() != Blocks.DISPENSER) {
+		//lookPos.getBlockPos() != null && lookPos != null && 
+		if (player.isSneaking() && worldIn.getBlockState(lookPos.getBlockPos()).getBlock() != Blocks.DISPENSER) {
 			setMode(held, getMode(held) + 1);
 			if (!worldIn.isRemote) {
 				PlayerHelper.sendMessage(player, new TextComponentTranslation(ScrewdriverHandler.MODES.get(getMode(held)).getName()).getFormattedText(), true);

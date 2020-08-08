@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "north": "tardis:blocks/epanel_light_north",
+      "south": "tardis:blocks/epanel_light_none",
+      "west": "tardis:blocks/epanel_light_none",
+      "east": "tardis:blocks/epanel_light_none"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

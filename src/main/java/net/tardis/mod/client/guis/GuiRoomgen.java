@@ -1,8 +1,14 @@
 package net.tardis.mod.client.guis;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.tileentity.TileEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -10,27 +16,29 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
 import net.tardis.mod.client.guis.elements.ButtonMonitor;
-import net.tardis.mod.common.ars.ConsoleRoom;
+import net.tardis.mod.common.ars.Room;
 import net.tardis.mod.common.tileentity.TileEntityTardis;
 import net.tardis.mod.network.NetworkHandler;
-import net.tardis.mod.network.packets.MessageChangeInterior;
+import net.tardis.mod.network.packets.MessageChangeRoom;
+import net.tardis.mod.Tardis;
 
-public class GuiChangeInterior extends GuiScreen{
+public class GuiRoomgen extends GuiScreen{
 	
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Tardis.MODID, "textures/gui/roomgen.png");
 	private TileEntityTardis tardis;
 	private int index = 0;
-	
-	public GuiChangeInterior(TileEntityTardis tardis) {
-		this.tardis = tardis;
-	}
+
+	private static int guiWidth = 242;
+	private static int guiHeight = 132;
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
-		GuiMonitor.drawMonitorBackground(this, width, height);
+		GuiRoomgen.drawMonitorBackground(this, width, height);
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		Minecraft.getMinecraft().getTextureManager().bindTexture(ConsoleRoom.CONSOLE_ROOMS.get(index).getPreview());
+		Minecraft.getMinecraft().getTextureManager().bindTexture(Room.ROOMS.get(index).getPreview());
 		double ratio = 1.77;
 		int pX = width / 2 - 100, pY = height / 2 - 50, pHeight = 75, pWidth = (int) Math.floor(pHeight * ratio);
 		pX += pWidth / 4;
@@ -50,29 +58,46 @@ public class GuiChangeInterior extends GuiScreen{
 			((ButtonMonitor)button).doAction();
 		}
 	}
+	
+	public static void drawMonitorBackground(GuiScreen screen, int width, int height) {
+		Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
+		screen.drawTexturedModalRect(width / 2 - 242 / 2, height / 2 - 132 / 2, 0, 0, 242, 132);
+	}
 
 	@Override
 	public void initGui() {
 		super.initGui();
 		this.buttonList.clear();
-		this.addButton(this.addButton(2, "> Next interior")).addAction(() ->{
-			if(index + 1 > ConsoleRoom.CONSOLE_ROOMS.size() - 1)
+		this.addButton(this.addButton(2, "> Next Room")).addAction(() ->{
+			if(index + 1 > Room.ROOMS.size() - 1)
 				index = 0;
 			else ++index;
 		});
-		this.addButton(this.addButton(1, "> Prev interior")).addAction(() -> {
+		this.addButton(this.addButton(1, "> Prev Room")).addAction(() -> {
 			if(index - 1 < 0)
-				index = ConsoleRoom.CONSOLE_ROOMS.size() - 1;
+				index = Room.ROOMS.size() - 1;
 			else --index;
 		});
-		this.addButton(this.addButton(0, "> Select interior")).addAction(() -> {
-			NetworkHandler.NETWORK.sendToServer(new MessageChangeInterior(index, tardis.getPos()));
-			Minecraft.getMinecraft().player.sendChatMessage("/advancement grant @s only tardis:you_redecorated");
+		this.addButton(this.addButton(0, "> Select Room")).addAction(() -> {
+			//save NBT tag with room/corridor name
 			Minecraft.getMinecraft().displayGuiScreen(null);
 		});
 	}
-	
+
 	public ButtonMonitor addButton(int id, String name) {
 		return new ButtonMonitor(id, width / 2 - 110, (height / 2 + 50) - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * id, name);
+	}
+
+	@Override
+	public boolean doesGuiPauseGame() {
+		return false;
+	}
+
+	public static int getGuiWidth() {
+		return guiWidth;
+	}
+
+	public static int getGuiHeight() {
+		return guiHeight;
 	}
 }

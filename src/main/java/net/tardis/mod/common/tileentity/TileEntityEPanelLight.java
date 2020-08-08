@@ -17,11 +17,11 @@ import net.tardis.mod.util.common.helpers.TardisHelper;
 
 import javax.annotation.Nullable;
 
-public class TileEntityEPanel extends TileEntity implements ITickable, IInventory {
+public class TileEntityEPanelLight extends TileEntity implements ITickable, IInventory {
 
-	public int stateID = Block.getStateId(TBlocks.epanel_item.getDefaultState());
+	public int stateID = Block.getStateId(TBlocks.epanel_light.getDefaultState());
 
-	public TileEntityEPanel() {
+	public TileEntityEPanelLight() {
 	}
 
 	@Override

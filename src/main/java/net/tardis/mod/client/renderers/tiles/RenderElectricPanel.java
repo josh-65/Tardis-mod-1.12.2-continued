@@ -11,13 +11,13 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
-import net.tardis.mod.common.tileentity.TileEntityEPanel;
+import net.tardis.mod.common.tileentity.TileEntityEPanelItem;
 import org.lwjgl.opengl.GL11;
 
-public class RenderElectricPanel extends TileEntitySpecialRenderer<TileEntityEPanel> {
+public class RenderElectricPanel extends TileEntitySpecialRenderer<TileEntityEPanelItem> {
 
 	@Override
-	public void render(TileEntityEPanel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	public void render(TileEntityEPanelItem te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 		BufferBuilder bb = Tessellator.getInstance().getBuffer();

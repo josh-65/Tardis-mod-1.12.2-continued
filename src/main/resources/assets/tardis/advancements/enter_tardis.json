@@ -11,7 +11,7 @@
             "color": "white"
         },
         "icon": {
-            "item": "minecraft:stone"
+            "item": "tardis:tardis_top"
         },
         "frame": "task",
         "show_toast": true,
@@ -19,15 +19,13 @@
         "hidden": false
     },
     "criteria": {
-        "Enter Tardis": {
-            "trigger": "minecraft:changed_dimension"
+        "goto tardis": {
+            "trigger": "minecraft:location",
+            "conditions": {
+                "dimension": "tardis"
+            }
         }
     },
-    "requirements": [
-        [
-            "Enter Tardis"
-        ]
-    ],
     "rewards": {
         "recipes": [
             "tardis:sonic_screwdriver",

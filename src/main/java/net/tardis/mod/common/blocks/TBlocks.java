@@ -87,9 +87,9 @@ public class TBlocks {
 	
 	public static Block sonicRedstone;
 	
-	public static Block epanel_item = register(new BlockEPanel(), "epanel_item");
-	public static Block epanel_light = register(new BlockEPanel(), "epanel_light", false);
-	public static Block epanel_room = register(new BlockEPanel(), "epanel_room", false);
+	public static Block epanel_item = register(new BlockEPanelItem(), "epanel_item");
+	public static Block epanel_light = register(new BlockEPanelLight(), "epanel_light", false);
+	public static Block epanel_room = register(new BlockEPanelRoom(), "epanel_room", false);
 	
 	public static Block cinnabar_ore = register(new BlockItemDrop(() -> new ItemStack(TItems.crushedCinnabar), 1, 1), "cinnabar_ore");
 	public static Block tardis_coral = register(new BlockTardisCoral(), "tardis_coral");
@@ -128,7 +128,6 @@ public class TBlocks {
 	
 	public static Block zero_room_glow = register(new BlockVerticalSlab(), "zero_room_slab");
 	public static Block zero_room = register(new BlockBase(), "zero_room");
-
 	public static Block invis_light = register(new BlockInvislight(), "invis_light");
 	public static Block hellbent_light = register(new BlockFacingDecoration(TileEntityHellbentLight::new).setLightLevel(1F).setLightOpacity(0), "hellbent_light");
 	public static Block hellbent_monitor = register(new BlockMonitor(TileEntityHellbentMonitor::new), "hellbent_monitor");

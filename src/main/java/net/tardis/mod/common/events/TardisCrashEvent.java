@@ -1,5 +1,6 @@
 package net.tardis.mod.common.events;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.tardis.mod.common.tileentity.TileEntityTardis;
@@ -19,6 +20,7 @@ public class TardisCrashEvent extends Event {
         this.tardis = tardis;
         this.crashPos = crashPos;
         this.crashDimension = crashDimension;
+        Minecraft.getMinecraft().player.sendChatMessage("/advancement grant @s only tardis:crash_tardis");
     }
 
     /**
